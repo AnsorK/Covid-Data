@@ -6,7 +6,7 @@ import java.text.NumberFormat;
 /**
 * Create new Covid 19 Cases 
 * @author Ansor Kasimov
-* @version 1.0
+* @version 2.0
 */
 
 public class CovidCase implements Comparable<CovidCase> {
@@ -15,6 +15,7 @@ public class CovidCase implements Comparable<CovidCase> {
 	private LocalDate dateReported;
 	private String countryCode;
 	private String country;
+	@SuppressWarnings("unused")
 	private String whoRegion;
 	private int newCases;
 	private int cumulativeCases;
@@ -68,147 +69,25 @@ public class CovidCase implements Comparable<CovidCase> {
 		}
 	}
 	
-	/**
-	* Parameterized constructor
-	* @params Date reported, Country code, Country, WHO region, New cases, Cumulative cases, New deaths, Cumulative deaths
-	*/
-	public CovidCase(LocalDate dateReported, String countryCode, String country, String whoRegion, int newCases, int cumulativeCases, int newDeaths, int cumulativeDeaths) {
-		this.dateReported = dateReported;
-		this.countryCode = countryCode;
-		this.country = country;
-		this.whoRegion = whoRegion;
-		this.newCases = newCases;
-		this.cumulativeCases = cumulativeCases;
-		this.newDeaths = newDeaths;
-		this.cumulativeCases = cumulativeDeaths;
-	}
-
-	/**
-	* @return Date reported
-	*/
+	/** @return Date reported */
 	public LocalDate getDateReported() {
 		return dateReported;
 	}
 
-	/**
-	* @return Country code
-	*/
+	/** @return Country code */
 	public String getCountryCode() {
 		return countryCode;
 	}
 
-	/**
-	* @return Country 
-	*/
+	/** @return Country */
 	public String getCountry() {
 		return country;
 	}
 
-	/**
-	* @return WHO Region 
-	*/
-	public String getWhoRegion() {
-		return whoRegion;
-	}
-
-	/** 
-	* @return New cases
-	*/
-	public int getNewCases() {
-		return newCases;
-	}
-
-	/**
-	* @return Cumulative cases 
-	*/
-	public int getCumulativeCases() {
-		return cumulativeCases;
-	}
-
-	/**
-	* @return New deaths 
-	*/
-	public int getNewDeaths() {
-		return newDeaths;
-	}
-
-	/**
-	* @return Cumulative deaths 
-	*/
-	public int getCumulativeDeaths() {
-		return cumulativeDeaths;
-	}
-
-	/**
-	* Update date reported
-	* @param Date reported
-	*/
-	public void setDateReported(LocalDate dateReported) {
-		this.dateReported = dateReported;
-	}
-
-	/**
-	* Update country code
-	* @param Country code
-	*/
-	public void setCountryCode(String countryCode) {
-		this.countryCode = countryCode;
-	}
-
-	/**
-	* Update country
-	* @param Country
-	*/
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	/**
-	* Update WHO region
-	* @param WHO region
-	*/
-	public void setWhoRegion(String whoRegion) {
-		this.whoRegion = whoRegion;
-	}
-
-	/**
-	* Update new cases
-	* @param New cases
-	*/
-	public void setNewCases(int newCases) {
-		this.newCases = newCases;
-	}
-
-	/**
-	* Update cumulative cases
-	* @param Cumulative cases
-	*/
-	public void setCumulativeCases(int cumulativeCases) {
-		this.cumulativeCases = cumulativeCases;
-	}
-
-	/**
-	* Update new deaths
-	* @param New deaths
-	*/
-	public void setNewDeaths(int newDeaths) {
-		this.newDeaths = newDeaths;
-	}
-
-	/**
-	* Update cumulative deaths
-	* @param Cumulative deaths
-	*/
-	public void setCumulativeDeaths(int cumulativeDeaths) {
-		this.cumulativeDeaths = cumulativeDeaths;
-	}
-
-	/**
-	* @return String representation of Covid Data
-	*/
+	/** @return String representation of Covid Data */
 	public String toString() {
 		NumberFormat nf = NumberFormat.getInstance();
-		return "[" + this.getDateReported() + "]\n" +  "COVID-19 Data for " + this.getCountry() + "\nCases today: " + nf.format(this.getNewCases()) + "\nDeaths today: " + nf.format(this.getNewDeaths()) + "\nCumulative cases to date: " + nf.format(this.getCumulativeCases()) + "\nCumulative deaths to date: " + nf.format(this.getCumulativeDeaths());
+		return "[" + dateReported + "]\n" +  "COVID-19 Data for " + country + "\nCases today: " + nf.format(newCases) + "\nDeaths today: " + nf.format(newDeaths) + "\nCumulative cases to date: " + nf.format(cumulativeCases) + "\nCumulative deaths to date: " + nf.format(cumulativeDeaths);
 	}
 
 	/**

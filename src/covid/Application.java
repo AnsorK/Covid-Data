@@ -7,7 +7,7 @@ import java.util.*;
 /**
 * Fetch and parse WHO Covid-19 data 
 * @author Ansor Kasimov
-* @version 1.0
+* @version 2.0
 */
 
 public class Application {
@@ -18,37 +18,21 @@ public class Application {
 			LinkedList<CovidCase> list = new LinkedList<CovidCase>();
 			
 			// CSV file
-			File dataFile = new File("WHO-COVID-19-global-data.csv");
 			URL dataURL = null;
 			
 			try {
 				dataURL = new URL("https://covid19.who.int/WHO-COVID-19-global-data.csv");
 			} catch (MalformedURLException murle) {
-				murle.printStackTrace();
+				System.out.println("Error getting website");
 			}
 			
+			// Scanner
+			Scanner sc;
 			String line;
 			
-			// Make a new CSV file if there isnt already one in this directory
-			if (!dataFile.exists()) {	
-				try {
-					Scanner sc = new Scanner(dataURL.openStream());
-					PrintWriter pw = new PrintWriter(dataFile);
-					while (sc.hasNextLine()) {
-						line = sc.nextLine();
-						pw.println(line);
-					}
-					sc.close();
-					pw.close();
-				} catch (IOException ioe) {
-					System.out.println("Error creating the file or reading data from URL");
-					System.exit(1);
-				}
-			}
-		
 			// Parse the data and turn them into instances of CovidCase
 			try {
-				Scanner sc = new Scanner(dataFile);
+				sc = new Scanner(dataURL.openStream());
 				sc.nextLine();
 				while (sc.hasNextLine()) {
 					line = sc.nextLine();
@@ -59,12 +43,12 @@ public class Application {
 						list.add(cc);
 				}
 				sc.close();
-			} catch (FileNotFoundException fnfe) {
-				fnfe.printStackTrace();
+			} catch (IOException ioe) {
+				System.out.println("Error adding data to list");
 			}
 				
 			// 1st question
-			Scanner sc = new Scanner(System.in);
+			sc = new Scanner(System.in);
 			System.out.print("Enter a valid country name or country code (q to quit): ");
 			String input = sc.nextLine();
 			
@@ -89,8 +73,8 @@ public class Application {
 					else {
 						for (CovidCase cc : list) { 
 							if (cc.getCountryCode().toLowerCase().equals(input.toLowerCase())) {
-									System.out.println("\n" + list.get(list.lastIndexOf(cc)));
-									break;
+								System.out.println("\n" + list.get(list.lastIndexOf(cc)));
+								break;
 							} 
 						} 
 					}
